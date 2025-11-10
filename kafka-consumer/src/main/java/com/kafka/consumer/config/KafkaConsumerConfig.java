@@ -1,4 +1,4 @@
-package com.kafka.config;
+package com.kafka.consumer.config;
 
 
 import java.util.HashMap;
@@ -15,9 +15,6 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 @EnableKafka
 @Configuration
 public class KafkaConsumerConfig {
-
-	
-	//confluentinc/cp-kafka:latest:9092
 	
     @Bean
     public ConsumerFactory<String, String> consumerFactory() {
