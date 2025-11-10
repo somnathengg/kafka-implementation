@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+    <Properties>
+        <Property name="LOG_PATTERN">
+            %d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${hostName} --- [%15.15t] %-40.40c{1.} : %m%n%ex
+        </Property>
+    </Properties>
+
+    <Appenders>
+        <!-- Rolling File Appender -->
+        <RollingFile name="FileAppender" fileName="E:/Kafka_Logs/kafka_application.log"
+                     filePattern="E:/Kafka_Logs/log4j2-demo-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout>
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" />
+                <SizeBasedTriggeringPolicy size="10MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+        
+        <Console name="ConsoleAppender" target="SYSTEM_OUT">
+            <PatternLayout>
+                <!-- Pattern format -->
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
+        </Console>
+
+    </Appenders>
+
+    <Loggers>
+        <AsyncLogger name="com.kafka" level="info" additivity="false">
+            <!-- <AppenderRef ref="ConsoleAppender" /> -->
+            <AppenderRef ref="FileAppender" />
+        </AsyncLogger>
+
+        <Root level="info">
+            <AppenderRef ref="ConsoleAppender" />
+            <AppenderRef ref="FileAppender" />
+        </Root>
+    </Loggers>
+</Configuration>
